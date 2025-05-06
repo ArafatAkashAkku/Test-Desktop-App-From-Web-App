@@ -1,0 +1,21 @@
+{
+  "name": "desktop-app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron .",
+    "build": "cd ../web-app && npm run build && cd ../desktop-app && (if exist builder rmdir /s /q builder) && (if exist dist rmdir /s /q dist) && mkdir builder && xcopy /e /i /y \"../web-app/dist\\*\" \"builder\\\" && electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Desktop App",
+  "devDependencies": {
+    "electron": "^36.1.0",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "electron-is-dev": "^3.0.1"
+  }
+}
