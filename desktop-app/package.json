@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "dev": "electron .",
-    "build": "cd ../web-app && npm run build && cd ../desktop-app && (if exist builder rmdir /s /q builder) && (if exist dist rmdir /s /q dist) && mkdir builder && xcopy /e /i /y \"../web-app/dist\\*\" \"builder\\\" && electron-builder"
+    "build": "cd ../web-app && npm run build && cd ../desktop-app && (if exist builder rmdir /s /q builder) && (if exist dist rmdir /s /q dist) && mkdir builder && xcopy /e /i /y \"../web-app/dist\\*\" \"builder\\\" && electron-builder",
+    "update": "ncu -u && (if exist node_modules rmdir /s /q node_modules) && (if exist package-lock.json del /f /q package-lock.json) && npm install"
   },
   "keywords": [],
   "author": "",
