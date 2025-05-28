@@ -5,23 +5,26 @@
   "main": "main.js",
   "scripts": {
     "dev": "electron .",
-    "build": "cd ../web-app && npm run build && cd ../desktop-app && rimraf builder dist && node -e \"require('fs-extra').copySync('../web-app/dist', 'builder')\" && electron-builder",
-    "optionalbuild": "cd ../web-app && npm run build && cd ../desktop-app && (if exist builder rmdir /s /q builder) && (if exist dist rmdir /s /q dist) && mkdir builder && xcopy /e /i /y \"../web-app/dist\\*\" \"builder\\\" && electron-builder",
+    "build": "cd ../web-app && npm install && npm run build && cd ../desktop-app && npm install && rimraf builder dist && node -e \"require('fs-extra').copySync('../web-app/dist', 'builder')\" && electron-builder",
+    "optionalbuild": "cd ../web-app && npm install && npm run build && cd ../desktop-app && npm install && (if exist builder rmdir /s /q builder) && (if exist dist rmdir /s /q dist) && mkdir builder && xcopy /e /i /y \"../web-app/dist\\*\" \"builder\\\" && electron-builder",
     "update": "ncu -u && rimraf node_modules package-lock.json && npm install",
     "optionalupdate": "ncu -u && (if exist node_modules rmdir /s /q node_modules) && (if exist package-lock.json del /f /q package-lock.json) && npm install",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "Desktop App",
   "devDependencies": {
-    "electron": "^36.1.0",
+    "electron": "^36.3.1",
     "electron-builder": "^26.0.12",
     "npm-check-updates": "^18.0.1",
+    "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
-    "fs-extra": "^11.1.1"
+    "fs-extra": "^11.3.0"
   },
   "dependencies": {
-    "electron-is-dev": "^3.0.1"
+    "electron-is-dev": "^3.0.1",
+    "dotenv": "^16.5.0"
   }
 }

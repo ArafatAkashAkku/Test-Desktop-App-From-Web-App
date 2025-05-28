@@ -1,7 +1,10 @@
-import { app, BrowserWindow } from "electron/main";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "url";
-import isDev from "electron-is-dev";
+import { app, BrowserWindow } from 'electron/main';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'url';
+import isDev from 'electron-is-dev';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Define __dirname for ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -12,31 +15,33 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: join(__dirname, "preload.js"),
+      preload: join(__dirname, 'preload.js'),
     },
   });
 
   if (isDev) {
     // Load a URL instead of a local file
     //   win.loadFile('index.html')
-    win.loadURL("http://localhost:5173/");
+
+    win.loadURL(process.env.APP_URL || 'http://localhost:5173');
   } else {
-    win.loadFile(join(__dirname, "builder/index.html"));
+    // win.loadURL(process.env.APP_URL || "http://localhost:5173");
+    win.loadFile(join(__dirname, 'builder/index.html'));
   }
 }
 
 app.whenReady().then(() => {
   createWindow();
 
-  app.on("activate", () => {
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
 });
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
     app.quit();
   }
 });
