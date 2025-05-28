@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "electron .",
     "build": "cd ../web-app && npm run build && cd ../desktop-app && (if exist builder rmdir /s /q builder) && (if exist dist rmdir /s /q dist) && mkdir builder && xcopy /e /i /y \"../web-app/dist\\*\" \"builder\\\" && electron-builder",
-    "update": "ncu -u && (if exist node_modules rmdir /s /q node_modules) && (if exist package-lock.json del /f /q package-lock.json) && npm install"
+    "update": "ncu -u && rimraf node_modules package-lock.json && npm install",
+    "optionalupdate": "ncu -u && (if exist node_modules rmdir /s /q node_modules) && (if exist package-lock.json del /f /q package-lock.json) && npm install",
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,9 @@
   "description": "Desktop App",
   "devDependencies": {
     "electron": "^36.1.0",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.0.12",
+    "npm-check-updates": "^18.0.1",
+    "rimraf": "^6.0.1"
   },
   "dependencies": {
     "electron-is-dev": "^3.0.1"
